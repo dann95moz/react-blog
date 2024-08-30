@@ -14,9 +14,9 @@ const App: React.FC = () => {
         <Router>
           <div className="App">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/post/:id" element={<PostView />} />
-              <Route path="/users" element={<UserList />} />
+              <Route path="/react-blog/" element={<Home />} />
+              <Route path="/react-blog/post/:id" element={<PostView />} />
+              <Route path="/react-blog/users" element={<UserList />} />
             </Routes>
           </div>
         </Router>

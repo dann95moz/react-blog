@@ -26,7 +26,7 @@ const onTagSelect = (tag:string) => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Blog Home
           </Typography>
-          <Button color="inherit" component={Link} to="/users">
+          <Button color="inherit" component={Link} to="/react-blog/users">
             Users
           </Button>
         </Toolbar>
