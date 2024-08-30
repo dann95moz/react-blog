@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -19,6 +20,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
+    googleLogout();
     setIsAuthenticated(false);
     setUser(null);
   };
