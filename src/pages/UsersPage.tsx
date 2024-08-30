@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../services/api';
 import { UserPreview } from '../models';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<UserPreview[]>([]);
@@ -10,6 +11,7 @@ const UsersPage: React.FC = () => {
   }, []);
 
   return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID as string}>
     <div>
       <h1>Users</h1>
       <div>
@@ -21,6 +23,7 @@ const UsersPage: React.FC = () => {
         ))}
       </div>
     </div>
+    </GoogleOAuthProvider>
   );
 };
 
