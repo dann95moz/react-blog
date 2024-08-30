@@ -49,7 +49,7 @@ const onTagSelect = (tag:string) => {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          Ver todos los tags
+         <Typography> Ver todos los tags</Typography>
         </AccordionSummary>
         <AccordionDetails>
         {tags && tags.map(tag => (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Grid2, CardActions, Button } from '@mui/material';
-import { getPosts } from '../services/api';
-import { PostPreview } from '../models';
+import { Card, CardContent, CardMedia, Typography, Grid2, CardActions, Button, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { getCommentsByPostId, getPostById, getPosts } from '../services/api';
+import { Comment, PostPreview } from '../models';
 
 interface PostListProps {
   selectedTag: string | null;
@@ -9,7 +9,9 @@ interface PostListProps {
 
 const PostList: React.FC<PostListProps> = ({ selectedTag }) => {
   const [posts, setPosts] = useState<PostPreview[]>([]);
-const [modalId, setModalId] = useState<null|string>(null)
+const [isModalOpened, setIsModalOpened] = useState(false)
+const [selectedPost, setSelectedPost] = useState<null| PostPreview>(null)
+const [comments, setComments] = useState<Comment[]| null>(null)
   useEffect(() => {
     getPosts().then(response => {
       const filteredPosts = selectedTag
@@ -19,6 +21,19 @@ const [modalId, setModalId] = useState<null|string>(null)
     });
   }, [selectedTag]);
 
+  useEffect(() => {
+  if (selectedPost) {
+    getCommentsByPostId(selectedPost.id).then(response => {
+      setComments(response.data.data)
+    })
+  }
+  }, [selectedPost])
+  
+
+const handleOpenComments = (post:PostPreview) => {
+  setSelectedPost(post)
+  setIsModalOpened(true)
+}
 
 
 
@@ -47,13 +62,22 @@ const [modalId, setModalId] = useState<null|string>(null)
               </Typography>
             </CardContent>
             <CardActions >
-        <Button onClick={()=>setModalId(post.id)}>See comments</Button>
+        <Button onClick={()=>handleOpenComments(post)}>See comments</Button>
             </CardActions>
         
           </Card>
+        
         </Grid2>
         
       ))}
+      {selectedPost && <Dialog onClose={()=>setIsModalOpened(false)} open={isModalOpened}>
+      <DialogTitle>{selectedPost.text}</DialogTitle>
+      <DialogContent>
+          {comments&&comments.map((comment)=>(
+            <Typography component='h5' key={comment.id}>{comment.message}</Typography>
+          ))}
+      </DialogContent>
+    </Dialog>}
     </Grid2>
   );
 };
