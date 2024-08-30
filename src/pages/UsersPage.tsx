@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<UserPreview[]>([]);
-  const { isAuthenticated, user, login, logout } = useAuth();
+  const { isAuthenticated, login, logout } = useAuth();
   useEffect(() => {
     getUsers().then(response => setUsers(response.data.data));
   }, []);

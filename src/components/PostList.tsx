@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Grid2, CardActions, Button, Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { getCommentsByPostId, getPostById, getPosts } from '../services/api';
+import { getCommentsByPostId, getPosts } from '../services/api';
 import { Comment, PostPreview } from '../models';
 
 interface PostListProps {

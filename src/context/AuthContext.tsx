@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { googleLogout } from '@react-oauth/google';
 
 interface AuthContextType {
   isAuthenticated: boolean;
